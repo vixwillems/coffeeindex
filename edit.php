@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-tertiary pb-10">
 
 <nav class="shadow mb-6 bg-secondary">
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-full mx-auto px-6">
         <div class="flex justify-between h-16">
             <div class="flex space-x-8 items-center">
                 <a href="index.php" class="text-xl font-bold transition">
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </nav>
 
-<div class="max-w-5xl mx-auto p-6">
+<div class="max-w-7xl mx-auto px-6 py-6">
     <div class="mb-6">
         <h1 class="text-3xl font-bold" style="color: var(--secondary);">
             <?= $id ? '✏️ Edit Coffee' : '➕ Add New Coffee' ?>

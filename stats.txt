@@ -34,13 +34,7 @@ while ($bean = $all_beans->fetch_assoc()) {
     }
     
     if (!empty($bean['country'])) {
-        // Split comma-separated countries and trim whitespace
-        $individual_countries = array_map('trim', explode(',', $bean['country']));
-        foreach ($individual_countries as $country_name) {
-            if (!empty($country_name)) {
-                $countries[$country_name] = ($countries[$country_name] ?? 0) + 1;
-            }
-        }
+        $countries[$bean['country']] = ($countries[$bean['country']] ?? 0) + 1;
     }
     
     if (!empty($bean['process'])) {
@@ -89,57 +83,7 @@ $country_emojis = [
     'Guatemala' => '🇬🇹',
     'Costa Rica' => '🇨🇷',
     'Rwanda' => '🇷🇼',
-    'Burundi' => '🇧🇮',
-	'Angola' => '🇦🇴',
-	'Bolivia' => '🇧🇴',
-'Brazil' => '🇧🇷',
-'Cambodia' => '🇰🇭',
-'Cameroon' => '🇨🇲',
-'Central African Republic' => '🇨🇫',
-'China' => '🇨🇳',
-'Colombia' => '🇨🇴',
-'Costa Rica' => '🇨🇷',
-'Cuba' => '🇨🇺',
-'Democratic Republic of the Congo' => '🇨🇩',
-'Dominican Republic' => '🇩🇴',
-'Ecuador' => '🇪🇨',
-'El Salvador' => '🇸🇻',
-'Ethiopia' => '🇪🇹',
-'Gabon' => '🇬🇦',
-'Ghana' => '🇬🇭',
-'Guatemala' => '🇬🇹',
-'Guinea' => '🇬🇳',
-'Haiti' => '🇭🇹',
-'Honduras' => '🇭🇳',
-'India' => '🇮🇳',
-'Indonesia' => '🇮🇩',
-'Ivory Coast' => '🇨🇮',
-'Jamaica' => '🇯🇲',
-'Kenya' => '🇰🇪',
-'Laos' => '🇱🇦',
-'Madagascar' => '🇲🇬',
-'Malawi' => '🇲🇼',
-'Mexico' => '🇲🇽',
-'Myanmar' => '🇲🇲',
-'Nicaragua' => '🇳🇮',
-'Nigeria' => '🇳🇬',
-'Panama' => '🇵🇦',
-'Papua New Guinea' => '🇵🇬',
-'Peru' => '🇵🇪',
-'Philippines' => '🇵🇭',
-'Puerto Rico' => '🇵🇷',
-'Rwanda' => '🇷🇼',
-'Sierra Leone' => '🇸🇱',
-'Sri Lanka' => '🇱🇰',
-'Tanzania' => '🇹🇿',
-'Thailand' => '🇹🇭',
-'Togo' => '🇹🇬',
-'Uganda' => '🇺🇬',
-'Venezuela' => '🇻🇪',
-'Vietnam' => '🇻🇳',
-'Yemen' => '🇾🇪',
-'Zambia' => '🇿🇲',
-'Zimbabwe' => '🇿🇼'
+    'Burundi' => '🇧🇮'
 ];
 ?>
 <!DOCTYPE html>
@@ -161,8 +105,8 @@ $country_emojis = [
         <div class="flex justify-between h-16">
             <div class="flex space-x-8 items-center">
                 <a href="index" class="text-xl font-bold transition">
-  <span class="text-tertiary">☕ Coffee</span><span class="text-primary">Index</span>
-</a>
+  					<span class="text-tertiary">☕ Coffee</span><span class="text-primary">Index</span>
+				</a>
                 
                 <a href="index" class="font-medium border-b-2 border-transparent transition menu-item" style="color: var(--primary) !important;">Index</a>
                 <a href="stats" class="font-medium border-b-2 border-transparent transition menu-item" style="color: var(--primary) !important;">Statistics</a>
@@ -268,7 +212,7 @@ $country_emojis = [
         <div class="bg-white p-5 rounded-lg shadow h-full breakdown-card">
             <h3 class="font-bold text-lg mb-4 text-gray-700">Roasters</h3>
             <ol class="list-decimal pl-5 space-y-2 text-sm text-gray-700">
-                <?php foreach (array_slice($roasters, 0, 50) as $roaster => $count): ?>
+                <?php foreach (array_slice($roasters, 0, 10) as $roaster => $count): ?>
                 <li class="pl-2">
                     <div class="flex justify-between items-center w-full">
                         <span class="font-medium truncate pr-2"><?= htmlspecialchars($roaster) ?></span>
@@ -285,7 +229,7 @@ $country_emojis = [
         <div class="bg-white p-5 rounded-lg shadow h-full breakdown-card">
             <h3 class="font-bold text-lg mb-4 text-gray-700">Countries</h3>
             <ol class="list-decimal pl-5 space-y-2 text-sm text-gray-700">
-                <?php foreach (array_slice($countries, 0, 50) as $country => $count): ?>
+                <?php foreach (array_slice($countries, 0, 10) as $country => $count): ?>
                 <li class="pl-2">
                     <div class="flex justify-between items-center w-full">
                         <span class="font-medium truncate pr-2">
@@ -332,10 +276,10 @@ $country_emojis = [
             </ol>
         </div>
         <?php endif; ?>
-
+		
         <!-- Tasting Notes -->
         <?php if (!empty($tasting_notes_all)): ?>
-        <div class="bg-white p-5 rounded-lg shadow h-full breakdown-card">
+		<div class="bg-white p-5 rounded-lg shadow h-full breakdown-card">
             <h3 class="font-bold text-lg mb-4 text-gray-700">Tasting Notes</h3>
             <ol class="list-decimal pl-5 space-y-2 text-sm text-gray-700">
                 <?php foreach (array_slice($tasting_notes_all, 0, 15) as $note => $count): ?>
